@@ -20,13 +20,19 @@ function App() {
   };
 
   const handleAddComment = async (text) => {
+    console.log({ text });
     await axios.post("http://localhost:3000/comments", { text });
     fetchComments();
   };
 
   const handleReply = async (id, text) => {
-    await axios.post(`http://localhost:3000/comments/${id}/reply`, { text });
-    fetchComments();
+    console.log("hi")
+    try {
+      await axios.post(`http://localhost:5000/comments/${id}/reply`, { text });
+      fetchComments();
+    } catch (error) {
+      console.error('Error replying to comment:', error);
+    }
   };
 
   const handleUpvote = async (id) => {
@@ -44,7 +50,7 @@ function App() {
       <SortOptions sortOption={sortOption} setSortOption={setSortOption} />
       <CommentSection
         comments={comments}
-        anAddComment={handleAddComment}
+        onAddComment={handleAddComment}
         onReply={handleReply}
         onUpvote={handleUpvote}
         onDownvote={handleDownvote}

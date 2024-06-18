@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Comment = require('../models/Comment');
 const { Timestamp } = require('mongodb');
+const {v4: uuidv4} = require('uuid')
 
-router.get('/', async(req, res) => {
+router.get('/', async (req, res) => {
     const sort = req.query.sort || 'time';
     let sortCriteria = {};
     if (sort === 'score'){
@@ -42,18 +43,19 @@ router.post('/:id/reply', async (req, res)=> {
     }
 });
 
-router.post('/:id/upvotes', async (req, res) => {
+router.post('/:id/upvote', async (req, res) => {
     const comment = await Comment.findOne({id : req.params.id});
+    console.log(comment)
     if (comment){
         comment.upvotes += 1;
         await comment.save();
-        re.json(comment);
+        res.json(comment);
     } else {
         res.status(404).send('Comment not found');
     }
 });
 
-router.post('/:id/downvote', async (req, res) => {
+router.post('/:id/downvotes', async (req, res) => {
     const comment = await Comment.findOne({id : req.params.id});
     if(comment){
         comment.downvotes +=1;
@@ -64,4 +66,4 @@ router.post('/:id/downvote', async (req, res) => {
     }
 } );
 
-module.export = router;
+module.exports = router;

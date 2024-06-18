@@ -1,22 +1,30 @@
-import React, {useState} from "react";
+import { useState } from "react";
 
-const CommentForm = ({ onSubmit }) => {
-    const [text, setText] = useState('');
+const CommentForm = ({ onAddComment }) => {
+  const [text, setText] = useState("");
 
-    const handleSubmit = (e)=>{
-        console.log("submit button triigerd")
-        e.preventDefault();
-        onSubmit(text);
-        setText('')
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (onAddComment) onAddComment(text);
+    setText("");
+  };
 
-    }
+  return (
+    <form onSubmit={handleSubmit}>
+      <textarea
+        name=""
+        id=""
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        required
+      ></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <textarea name="" id="" value={text} onChange={(e) => setText(e.target.value)} required ></textarea>
-            <button type="submit" >Submit</button>
-        </form>
-    )
+CommentForm.propTypes = {
+
 }
 
 export default CommentForm;
