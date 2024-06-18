@@ -1,6 +1,7 @@
 import React from "react";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
+import '../CommentSection.css'
 
 const CommentSection = ({
   comments,
@@ -11,7 +12,7 @@ const CommentSection = ({
 }) => {
 
 
-  
+
   return (
     <div>
       <CommentForm onAddComment={onAddComment} />

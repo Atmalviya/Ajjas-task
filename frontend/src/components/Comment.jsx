@@ -17,7 +17,7 @@ const Comment = ({ comment, onReply, onUpvote, onDownvote }) => {
         <button onClick={() => onDownvote(comment.id)}>Downvote ({comment.downvotes})</button>
         <button onClick={() => setShowReplyForm(!showReplyForm)}>Reply</button>
       </div>
-      {showReplyForm && <CommentForm onSubmit={handleReply} />}
+      {showReplyForm && <CommentForm onAddComment={handleReply} />}
       {comment.replies && comment.replies.length > 0 && (
         <div className="replies">
           {comment.replies.map(reply => (

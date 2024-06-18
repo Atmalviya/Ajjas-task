@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 import CommentSection from "./components/CommentSection";
 import SortOptions from "./components/SortOptions";
+import './CommentSection.css';
 
 function App() {
   const [comments, setComments] = useState([]);
@@ -28,7 +29,7 @@ function App() {
   const handleReply = async (id, text) => {
     console.log("hi")
     try {
-      await axios.post(`http://localhost:5000/comments/${id}/reply`, { text });
+      await axios.post(`http://localhost:3000/comments/${id}/reply`, { text });
       fetchComments();
     } catch (error) {
       console.error('Error replying to comment:', error);
